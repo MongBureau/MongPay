@@ -2,6 +2,7 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MongPay</title>
     <style>
         * {
             margin: 0;
@@ -17,7 +18,7 @@
         }
 
         .container {
-            max-width: 90%; /* Changed from 480px to 90% */
+            max-width: 90%;
             margin: 0 auto;
             padding: 16px;
         }
@@ -30,8 +31,8 @@
         }
 
         .header h1 {
-            font-size: 2rem; /* Changed to rem for scalability */
-            color: #1e293b;
+            font-size: 2rem;
+            color: #3b1e1e;
         }
 
         .profile-pic {
@@ -42,8 +43,8 @@
         }
 
         .card-area {
-            width: 100%; /* Set to 100% for responsiveness */
-            height: auto; /* Allow height to adjust */
+            width: 100%;
+            height: auto;
             background: #e2e8f0;
             border-radius: 12px;
             display: flex;
@@ -51,13 +52,13 @@
             justify-content: center;
             color: #64748b;
             margin-bottom: 16px;
-            padding: 16px; /* Add padding for better content fit */
+            padding: 16px;
         }
 
         .pay-button {
             width: 100%;
-            padding: 12px; /* Slightly reduced padding */
-            background: #2563eb;
+            padding: 12px;
+            background: linear-gradient(135deg, #fb4141, #ff3131);
             color: white;
             border: none;
             border-radius: 8px;
@@ -68,13 +69,13 @@
         }
 
         .pay-button:hover {
-            background: #1d4ed8;
+            background: linear-gradient(135deg, #ff3131, #ff0000);
         }
 
         .balance-card {
-            width: 100%; /* Set to 100% */
+            width: 100%;
             padding: 24px;
-            background: linear-gradient(135deg, #2563eb, #1d4ed8);
+            background: linear-gradient(135deg, #fb4141, #ff3131);
             border-radius: 12px;
             color: white;
             margin-bottom: 16px;
@@ -86,7 +87,7 @@
         }
 
         .balance-amount {
-            font-size: 2rem; /* Changed to rem */
+            font-size: 2rem;
             font-weight: bold;
             margin: 8px 0;
         }
@@ -97,7 +98,7 @@
         }
 
         .activity-card {
-            width: 100%; /* Set to 100% */
+            width: 100%;
             padding: 24px;
             background: white;
             border-radius: 12px;
@@ -160,7 +161,7 @@
         }
 
         .nav-items {
-            max-width: 90%; /* Adjust for responsiveness */
+            max-width: 90%;
             margin: 0 auto;
             display: flex;
             justify-content: space-between;
@@ -177,10 +178,10 @@
         }
 
         .nav-item.active {
-            color: #2563eb;
+            color: #ff0000;
         }
 
-        /* Payment Animation Overlay */
+        /* Payment Animation Styles */
         .payment-overlay {
             position: fixed;
             inset: 0;
@@ -192,6 +193,14 @@
         }
 
         .payment-animation {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            gap: 24px;
+        }
+
+        .payment-icon-container {
             position: relative;
             width: 192px;
             height: 192px;
@@ -225,12 +234,33 @@
             justify-content: center;
         }
 
+        .checkmark {
+            display: none;
+            stroke-dasharray: 180;
+            stroke-dashoffset: 180;
+            transform-origin: 50% 50%;
+            stroke: #16a34a;
+            stroke-width: 6;
+        }
+
+        .checkmark.animate {
+            display: block;
+            animation: drawCheck 0.5s ease-in-out forwards;
+        }
+
         .payment-text {
             color: white;
-            text-align: center;
-            margin-top: 24px;
             font-size: 20px;
             font-weight: 500;
+            margin: 0;
+            opacity: 1;
+            transition: opacity 0.3s ease;
+        }
+
+        @keyframes drawCheck {
+            to {
+                stroke-dashoffset: 0;
+            }
         }
 
         @keyframes ping {
@@ -244,18 +274,17 @@
             }
         }
 
-        @media (max-width: 480px) {
-            .header h1 {
-                font-size: 1.5rem; /* Smaller size for mobile */
-            }
+        .success .ring {
+            animation: none;
+            opacity: 0;
+        }
 
-            .pay-button {
-                padding: 10px; /* Smaller padding */
-            }
+        .success .payment-icon {
+            background: white;
+        }
 
-            .balance-amount {
-                font-size: 1.5rem; /* Smaller balance font */
-            }
+        .success .payment-text {
+            color: #16a34a;
         }
     </style>
 </head>
@@ -267,10 +296,11 @@
         </div>
 
         <div class="card-area">
+            <!-- Replace with your card SVG/image -->
             Upload your custom card image here
         </div>
 
-        <button class="pay-button" onclick="showPaymentAnimation()">
+        <button class="pay-button" onclick="document.getElementById('paymentOverlay').style.display='flex'; setTimeout(showSuccess, 5000);">
             Tap to Pay
         </button>
 
@@ -284,7 +314,10 @@
             <h3 class="activity-header">Recent Activity</h3>
             <div class="transaction">
                 <div class="transaction-info">
-                    <div class="transaction-icon">↺</div>
+                    <div class="transaction-icon">
+                        <!-- Replace with your transaction icon SVG -->
+                        ↺
+                    </div>
                     <div class="transaction-details">
                         <p>Mong Market</p>
                         <p>Today</p>
@@ -294,7 +327,10 @@
             </div>
             <div class="transaction">
                 <div class="transaction-info">
-                    <div class="transaction-icon">↺</div>
+                    <div class="transaction-icon">
+                        <!-- Replace with your transaction icon SVG -->
+                        ↺
+                    </div>
                     <div class="transaction-details">
                         <p>Received from @friend</p>
                         <p>Yesterday</p>
@@ -304,7 +340,10 @@
             </div>
             <div class="transaction">
                 <div class="transaction-info">
-                    <div class="transaction-icon">↺</div>
+                    <div class="transaction-icon">
+                        <!-- Replace with your transaction icon SVG -->
+                        ↺
+                    </div>
                     <div class="transaction-details">
                         <p>Mong Groceries</p>
                         <p>Oct 25</p>
@@ -317,34 +356,69 @@
 
     <nav class="nav-bar">
         <div class="nav-items">
-            <a href="#" class="nav-item active">🏠<span>Home</span></a>
-            <a href="#" class="nav-item">↺<span>Activity</span></a>
-            <a href="#" class="nav-item">➚<span>Send</span></a>
-            <a href="#" class="nav-item">👤<span>Profile</span></a>
+            <!-- Replace these emojis with your nav icons -->
+            <a href="#" class="nav-item active">
+                <img src="images/home.svg">
+                <span>Home</span>
+            </a>
+            <a href="#" class="nav-item">
+                <!-- Replace with activity icon SVG -->
+                <span>Activity</span>
+            </a>
+            <a href="#" class="nav-item">
+                <!-- Replace with send icon SVG -->
+                <span>Send</span>
+            </a>
+            <a href="#" class="nav-item">
+                <!-- Replace with profile icon SVG -->
+                <span>Profile</span>
+            </a>
         </div>
     </nav>
 
     <div class="payment-overlay" id="paymentOverlay">
         <div class="payment-animation">
-            <div class="ring"></div>
-            <div class="ring"></div>
-            <div class="ring"></div>
-            <div class="payment-icon">
+            <div class="payment-icon-container">
+                <div class="ring"></div>
+                <div class="ring"></div>
+                <div class="ring"></div>
                 <div class="payment-icon">
-                    <img src="images/card.svg" alt="Credit Card" class="payment-icon-img">
+                    <img src="images/card.svg" alt="Credit Card" class="payment-icon-img" id="cardIcon">
+                    </div>
+                    <svg class="checkmark" viewBox="0 0 100 100" width="92" height="92">
+                        <path d="M20,50 L40,70 L80,30" fill="none"/>
+                    </svg>
+                </div>
             </div>
-            <p class="payment-text">Hold near reader</p>
+            <p class="payment-text" id="paymentText">Hold near reader</p>
         </div>
     </div>
 
+    <audio id="successSound">
+        <source src="success-sound.mp3" type="audio/mpeg">
+    </audio>
+
     <script>
-        function showPaymentAnimation() {
-            const overlay = document.getElementById('paymentOverlay');
-            overlay.style.display = 'flex';
+        function showSuccess() {
+            const container = document.querySelector('.payment-animation');
+            const cardIcon = document.getElementById('cardIcon');
+            const checkmark = document.querySelector('.checkmark');
+            const paymentText = document.getElementById('paymentText');
+            const sound = document.getElementById('successSound');
+            
+            cardIcon.style.display = 'none';
+            container.classList.add('success');
+            checkmark.classList.add('animate');
+            paymentText.textContent = 'Payment Successful';
+            sound.play().catch(e => console.log('Sound play failed:', e));
             
             setTimeout(() => {
-                overlay.style.display = 'none';
-            }, 5000);
+                document.getElementById('paymentOverlay').style.display = 'none';
+                container.classList.remove('success');
+                checkmark.classList.remove('animate');
+                cardIcon.style.display = 'block';
+                paymentText.textContent = 'Hold near reader';
+            }, 2000);
         }
     </script>
 </body>
