@@ -55,6 +55,13 @@
             padding: 16px;
         }
 
+        .card-area > img {
+            max-width: 20%;
+            height: auto;
+            object-fit: contain;
+            border-radius: 12px;
+        }
+
         .pay-button {
             width: 100%;
             padding: 12px;
@@ -319,8 +326,7 @@
         </div>
 
         <div class="card-area">
-            <!-- Replace with your card SVG/image -->
-            Upload your custom card image here
+            <img src="images/maocard.png">
         </div>
 
         <button class="pay-button" onclick="document.getElementById('paymentOverlay').style.display='flex'; setTimeout(showSuccess, 5000);">
@@ -330,7 +336,7 @@
         <div class="balance-card">
             <p class="balance-label">Available Balance</p>
             <h2 class="balance-amount">$42,069.00</h2>
-            <p class="username">@mongpay-user</p>
+            <p class="username">@QuangDao</p>
         </div>
 
         <div class="activity-card">
