@@ -344,7 +344,7 @@
 
         <div class="balance-card">
             <p class="balance-label">Available Balance</p>
-            <h2 class="balance-amount">$42,069.00</h2>
+            <h2 class="balance-amount">¥300,019.23</h2>
             <p class="username">@QuangDao</p>
         </div>
 
@@ -361,7 +361,7 @@
                         <p>Today</p>
                     </div>
                 </div>
-                <span>-$420.69</span>
+                <span>-¥420.64</span>
             </div>
             <div class="transaction">
                 <div class="transaction-info">
@@ -374,7 +374,7 @@
                         <p>Yesterday</p>
                     </div>
                 </div>
-                <span class="positive-amount">+$69.00</span>
+                <span class="positive-amount">+¥69.00</span>
             </div>
             <div class="transaction">
                 <div class="transaction-info">
@@ -387,7 +387,7 @@
                         <p>Oct 25</p>
                     </div>
                 </div>
-                <span>-$89.99</span>
+                <span>-¥89.99</span>
             </div>
         </div>
     </div>
@@ -435,18 +435,26 @@
     </audio>
 
     <script>
+        document.querySelector('.pay-button').addEventListener('click', () => {
+            document.getElementById('paymentOverlay').style.display = 'flex';
+            
+            setTimeout(() => {
+                const sound = document.getElementById('successSound');
+                sound.play().catch(e => console.error('Sound play failed:', e));
+                showSuccess();
+            }, 5000);
+        });
+    
         function showSuccess() {
             const container = document.querySelector('.payment-animation');
             const cardIcon = document.getElementById('cardIcon');
             const checkmark = document.querySelector('.checkmark');
             const paymentText = document.getElementById('paymentText');
-            const sound = document.getElementById('successSound');
             
             cardIcon.style.display = 'none';
             container.classList.add('success');
             checkmark.classList.add('animate');
             paymentText.textContent = 'Payment Successful';
-            sound.play().catch(e => console.log('Sound play failed:', e));
             
             setTimeout(() => {
                 document.getElementById('paymentOverlay').style.display = 'none';
