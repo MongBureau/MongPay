@@ -32,7 +32,7 @@
 
         .header h1 {
             font-size: 2rem;
-            color: #3b1e1e;
+            color: #ff0000;
         }
 
         .profile-pic {
@@ -61,7 +61,13 @@
             object-fit: contain;
             border-radius: 12px;
         }
-
+        
+        @media (min-width: 768px) {
+            .card-area > img {
+                max-width: 50%; /* Adjust percentage as needed */
+                margin: 0 auto; /* Center image */
+            }
+        }
         .pay-button {
             width: 100%;
             padding: 12px;
@@ -164,7 +170,7 @@
             right: 0;
             background: white;
             border-top: 1px solid #e2e8f0;
-            padding: 8px 24px;
+            padding: 8px;
         }
 
         .nav-items {
@@ -387,7 +393,7 @@
         <div class="nav-items">
             <!-- Replace these emojis with your nav icons -->
             <a href="#" class="nav-item active">
-                
+                <img src="images/home.svg">
                 <span>Home</span>
             </a>
             <a href="#" class="nav-item">
@@ -422,7 +428,7 @@
     </div>
 
     <audio id="successSound">
-        <source src="success-sound.mp3" type="audio/mpeg">
+        <source src="audio/success.wav" type="audio/mpeg">
     </audio>
 
     <script>
