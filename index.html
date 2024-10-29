@@ -204,6 +204,9 @@
             position: relative;
             width: 192px;
             height: 192px;
+            display: flex; /* Use flexbox for inner centering */
+            align-items: center; /* Center the icon vertically */
+            justify-content: center; /* Center the icon horizontally */
         }
 
         .ring {
@@ -227,21 +230,36 @@
             position: relative;
             background: white;
             border-radius: 50%;
-            width: 192px;
-            height: 192px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            width: 192px; /* Circle size */
+            height: 192px; /* Circle size */
+            display: flex; /* Flex for centering */
+            align-items: center; /* Center the icon */
+            justify-content: center; /* Center the icon */
+}
+
+        .payment-icon-img {
+            width: 92px; /* Adjust icon size */
+            height: auto; /* Maintain aspect ratio */
+            position: relative; /* Keep it positioned within the icon */
+            z-index: 1; /* Make sure it's above the checkmark */
         }
 
         .checkmark {
-            display: none;
+            display: none; /* Initially hidden */
+            position: absolute; /* Position absolutely within payment-icon */
             stroke-dasharray: 180;
             stroke-dashoffset: 180;
             transform-origin: 50% 50%;
             stroke: #16a34a;
-            stroke-width: 6;
-        }
+            stroke-width: 10;
+            width: 100px; /* Adjust size to prevent squashing */
+            height: 100px; /* Adjust size */
+            top: 50%; /* Center vertically */
+            left: 50%; /* Center horizontally */
+            transform: translate(-50%, -50%); /* Adjust for exact centering */
+            z-index: 0; /* Behind the payment icon */
+}
+        
 
         .checkmark.animate {
             display: block;
@@ -249,12 +267,17 @@
         }
 
         .payment-text {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            text-align: center;
             color: white;
             font-size: 20px;
             font-weight: 500;
-            margin: 0;
+            margin: 10;
             opacity: 1;
             transition: opacity 0.3s ease;
+            transform: translateY(30px); /* Move text down by 16px */
         }
 
         @keyframes drawCheck {
@@ -384,14 +407,12 @@
                 <div class="ring"></div>
                 <div class="payment-icon">
                     <img src="images/card.svg" alt="Credit Card" class="payment-icon-img" id="cardIcon">
-                    </div>
-                    <svg class="checkmark" viewBox="0 0 100 100" width="92" height="92">
-                        <path d="M20,50 L40,70 L80,30" fill="none"/>
-                    </svg>
                 </div>
+                <svg class="checkmark" viewBox="0 0 100 100" width="92" height="92">
+                    <path d="M20,50 L40,70 L80,30" fill="none" />
+                </svg>
+                <p class="payment-text" id="paymentText">Hold near reader</p>
             </div>
-            <p class="payment-text" id="paymentText">Hold near reader</p>
-        </div>
     </div>
 
     <audio id="successSound">
